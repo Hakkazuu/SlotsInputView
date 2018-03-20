@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="text_color">#ff5252</color>
+    <color name="hint_color">#ef9a9a</color>
+    <color name="underline_color_focused">#ff5252</color>
+    <color name="underline_color_normal">#ef9a9a</color>
+</resources>

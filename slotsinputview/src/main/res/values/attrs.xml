@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SlotsInputView">
+        <attr name="siv_length" format="integer"/>
+        <attr name="siv_enabled" format="boolean"/>
+        <attr name="siv_text_size" format="dimension"/>
+        <attr name="siv_text_color" format="color"/>
+        <attr name="siv_hint_color" format="color"/>
+        <attr name="siv_underline_color" format="color"/>
+        <attr name="siv_hint" format="string"/>
+        <attr name="siv_input_type">
+            <enum name="number" value="0"/>
+            <enum name="number_password" value="1"/>
+            <enum name="text" value="2"/>
+            <enum name="text_password" value="3"/>
+        </attr>
+    </declare-styleable>
+
+</resources>

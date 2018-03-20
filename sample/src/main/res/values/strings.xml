@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SlotsInputView_Sample</string>
+
+    <string name="view_slots_input_programmatically_title">Programmatically:</string>
+    <string name="view_slots_input_xml_title">With XML attrs:</string>
+    <string name="go_button_label">Go!</string>
+</resources>
