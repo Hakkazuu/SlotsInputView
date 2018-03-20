@@ -1,9 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 26
-
-
 
     defaultConfig {
         minSdkVersion 21
@@ -22,11 +21,24 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+publish {
+    groupId = 'com.github.hakkazuu'
+    artifactId = 'slotsinputview'
+    publishVersion = '0.0.1'
+    desc = 'Simple view for input activation codes, PIN-codes and etc.'
+    licences = ['Apache-2.0']
+    uploadName='SlotsInputView'
+    website = 'https://github.com/Hakkazuu/SlotsInputView'
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
