@@ -1,6 +1,6 @@
 # **SlotsInputView**
 
-`SlotsInputView` is a simple view for input activation codes, PIN-codes and etc.
+`SlotsInputView` is a simple view for input activation codes, PIN-codes etc.
 
 ![](https://imgur.com/N08gwIl.gif)
 
@@ -27,7 +27,7 @@ First declare `SlotsInputView` in your `layout.xml`:
         android:layout_height="wrap_content" />
 ```
 
-After you can configure view programmatically:
+Then you can configure view programmatically:
 ```java
         SlotsInputView slotsInputView = findViewById(R.id.view_slots_input);
         
@@ -37,10 +37,10 @@ After you can configure view programmatically:
         // Hint text (default - "****")
         slotsInputView.setHint("*****");
         
-        // Text size as SP (default - 20)
+        // Text size in SP (default - 20)
         slotsInputView.setSlotTextSize(30);
         
-        // Simple colors from values or declared XMLs with states in res/color
+        // Simple colors from values folder or declared XMLs with states in res/color
         // (default - black for text and underline, gray for hint)
         slotsInputView.setSlotTextColor(R.color.text_color_states);
         slotsInputView.setHintTextColor(R.color.hint_color_states);
@@ -50,7 +50,7 @@ After you can configure view programmatically:
         slotsInputView.setInputType(InputType.TYPE_CLASS_NUMBER);
 ```
 
-Or do the same with XML attributes: 
+Or you can do the same with XML attributes: 
 
 ```xml
     <com.github.hakkazuu.slotsinputview.SlotsInputView
@@ -63,13 +63,13 @@ Or do the same with XML attributes:
         app:siv_input_type="number"/>
 ```
 
-Finally, handle SlotInputView's text and status of filling slots as you want on your own programmatically: 
+Finally, handle SlotInputView's text and status of filling slots in your code as you want: 
 ```java
     slotsInputView.setOnSlotsTextChangedListener(
         new SlotsInputView.OnSlotsTextChangedListener() {
             @Override
             public void onSlotsTextChanged(String text, ArrayList<String> textArrayList, boolean isFilled) {
-                // this button will enable when all slots was fill
+                // this button will be enabled when all slots are filled
                 anyButton.setEnabled(isFilled);
             }
     });
