@@ -30,8 +30,8 @@ android {
 publish {
     groupId = 'com.github.hakkazuu'
     artifactId = 'slotsinputview'
-    publishVersion = '0.0.2'
-    desc = 'Simple view for input activation codes, PIN-codes and etc.'
+    publishVersion = '0.0.4'
+    desc = 'Simple view for input activation codes, PIN-codes etc.'
     licences = ['Apache-2.0']
     uploadName='SlotsInputView'
     website = 'https://github.com/Hakkazuu/SlotsInputView'

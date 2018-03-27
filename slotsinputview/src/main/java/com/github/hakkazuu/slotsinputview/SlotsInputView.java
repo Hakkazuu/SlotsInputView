@@ -70,6 +70,20 @@ public class SlotsInputView extends LinearLayout {
     }
 
     /**
+     * Returns text
+     * @return text
+     */
+    public String getText() {
+        String text = "";
+        for(Slot slot : mSlotList) {
+            if(slot.mValue != null) {
+                text = text + slot.mValue;
+            }
+        }
+        return text;
+    }
+
+    /**
      * Sets new slots count and recreates slots
      * @param length - new slots count
      */
@@ -184,10 +198,10 @@ public class SlotsInputView extends LinearLayout {
         void onSlotsTextChanged(String text, ArrayList<String> textArrayList, boolean isFilled);
     }
 
-    private void init(Context context, @NonNull TypedArray typedArray) {
+    private void init(Context context, TypedArray typedArray) {
         mRoot = inflate(context, R.layout.view_slots_input, this);
         mLayout = mRoot.findViewById(R.id.view_slots_input_layout);
-        initAttributes(typedArray);
+        if(typedArray != null) initAttributes(typedArray);
         createSlots();
     }
 
@@ -287,7 +301,7 @@ public class SlotsInputView extends LinearLayout {
         private boolean mIsFilled;
         private String mValue;
 
-        public Slot(EditText slot, int slotIndex) {
+        Slot(EditText slot, int slotIndex) {
             mSlot = slot;
             mSlotIndex = slotIndex;
             mSlot.setEnabled(mIsEnabled);

@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SlotsInputView.iml" filepath="$PROJECT_DIR$/SlotsInputView.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SlotsInputView.iml" filepath="$PROJECT_DIR$/SlotsInputView.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
-      <module fileurl="file://$PROJECT_DIR$/slotsinputview/slotsinputview.iml" filepath="$PROJECT_DIR$/slotsinputview/slotsinputview.iml" />
       <module fileurl="file://$PROJECT_DIR$/slotsinputview/slotsinputview.iml" filepath="$PROJECT_DIR$/slotsinputview/slotsinputview.iml" />
     </modules>
   </component>

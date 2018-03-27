@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.hakkazuu.slotsinputview.SlotsInputView;
 
-import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
@@ -33,26 +33,18 @@ public class MainActivity extends Activity {
         mSlotsInputView1.setHintTextColor(R.color.hint_color_states);
         mSlotsInputView1.setUnderlineColor(R.color.underline_color_states);
         mSlotsInputView1.setInputType(InputType.TYPE_CLASS_NUMBER);
-        mSlotsInputView1.setOnSlotsTextChangedListener(new SlotsInputView.OnSlotsTextChangedListener() {
-            @Override
-            public void onSlotsTextChanged(String text, ArrayList<String> textArrayList, boolean isFilled) {
-                mInfoTextView.setText(
-                        "mSlotsInputView1" +
-                        "\ntext: " + text +
-                        "\ntextArrayList: " + textArrayList.toString() +
-                        "\nisFilled: " + isFilled);
-            }
-        });
+        mSlotsInputView1.setOnSlotsTextChangedListener((text, textArrayList, isFilled) -> mInfoTextView.setText(
+                "mSlotsInputView1" +
+                "\ntext: " + text +
+                "\ntextArrayList: " + textArrayList.toString() +
+                "\nisFilled: " + isFilled));
 
         // Created with XML attrs
         mGoButton = findViewById(R.id.go_button);
         mSlotsInputView2 = findViewById(R.id.view_slots_input2);
-        mSlotsInputView2.setOnSlotsTextChangedListener(new SlotsInputView.OnSlotsTextChangedListener() {
-            @Override
-            public void onSlotsTextChanged(String text, ArrayList<String> textArrayList, boolean isFilled) {
-                mGoButton.setEnabled(isFilled);
-            }
-        });
+        mSlotsInputView2.setOnSlotsTextChangedListener((text, textArrayList, isFilled) -> mGoButton.setEnabled(isFilled));
+
+        mGoButton.setOnClickListener(v -> Toast.makeText(MainActivity.this, mSlotsInputView2.getText(), Toast.LENGTH_LONG).show());
 
     }
 
