@@ -14,7 +14,7 @@ In Project `build.gradle`:
 
 In module `build.gradle`:
 ```groovy
-compile 'com.github.hakkazuu:slotsinputview:0.0.1'
+compile 'com.github.hakkazuu:slotsinputview:0.0.2'
 ```
 
 ## **Sample**

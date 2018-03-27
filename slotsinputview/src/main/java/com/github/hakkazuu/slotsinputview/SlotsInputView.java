@@ -2,6 +2,7 @@ package com.github.hakkazuu.slotsinputview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
@@ -303,15 +304,19 @@ public class SlotsInputView extends LinearLayout {
             mSlot.setMaxLines(1);
             mSlot.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSlotLength)});
             mSlot.setInputType(mInputType);
-            mSlot.setOnKeyListener(new OnKeyListener() {
-                @Override
-                public boolean onKey(View view, int keyCode, KeyEvent event) {
-                    if(keyCode == KeyEvent.KEYCODE_DEL) {
-                        requestFocusOnPrevSlot(Slot.this);
-                        checkSlots();
-                    }
-                    return false;
+            mSlot.setOnFocusChangeListener((view, hasFocus) -> {
+                if(hasFocus) {
+                    mSlot.setHintTextColor(Color.TRANSPARENT);
+                } else {
+                    mSlot.setHintTextColor(getResources().getColorStateList(mHintColor));
                 }
+            });
+            mSlot.setOnKeyListener((view, keyCode, event) -> {
+                if(keyCode == KeyEvent.KEYCODE_DEL) {
+                    requestFocusOnPrevSlot(Slot.this);
+                    checkSlots();
+                }
+                return false;
             });
             mSlot.addTextChangedListener(new TextWatcher() {
                 @Override
