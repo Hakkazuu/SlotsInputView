@@ -65,11 +65,11 @@ Or you can do the same with XML attributes:
 
 Finally, handle SlotInputView's text and status of filling slots in your code as you want: 
 ```java
+    // as example, "anyButton" will be enabled when all slots are filled
     slotsInputView.setOnSlotsTextChangedListener(
         new SlotsInputView.OnSlotsTextChangedListener() {
             @Override
             public void onSlotsTextChanged(String text, ArrayList<String> textArrayList, boolean isFilled) {
-                // this button will be enabled when all slots are filled
                 anyButton.setEnabled(isFilled);
             }
     });
