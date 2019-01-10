@@ -5,6 +5,11 @@
 ![](https://imgur.com/N08gwIl.gif)
 
 ## **Integration**
+Keep in mind that `SlotsInputView` has min API level 14 and these dependencies::
+```groovy
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+```
+
 In Project `build.gradle`:
 ```groovy
     repositories {
@@ -14,7 +19,7 @@ In Project `build.gradle`:
 
 In module `build.gradle`:
 ```groovy
-compile 'com.github.hakkazuu:slotsinputview:0.0.5'
+compile 'com.github.hakkazuu:slotsinputview:0.0.6'
 ```
 
 ## **Sample**

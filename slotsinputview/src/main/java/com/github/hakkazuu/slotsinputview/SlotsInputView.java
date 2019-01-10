@@ -4,15 +4,13 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -20,6 +18,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.core.widget.TextViewCompat;
 
 /**
  * Created by hakkazuu on 14.03.2018 at 20:07.
@@ -140,7 +144,7 @@ public class SlotsInputView extends LinearLayout {
     public void setUnderlineColor(@ColorRes int color) {
         mUnderlineColor = color;
         for(Slot slot : mSlotList) {
-            slot.mSlot.setBackgroundTintList(getResources().getColorStateList(color));
+            ViewCompat.setBackgroundTintList(slot.mSlot, getResources().getColorStateList(color));
         }
     }
 
@@ -307,11 +311,11 @@ public class SlotsInputView extends LinearLayout {
             mSlot.setEnabled(mIsEnabled);
             mSlot.setTextColor(getResources().getColorStateList(mIsEnabled ? mTextColor : mHintColor));
             mSlot.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
-            mSlot.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            mSlot.setGravity(Gravity.CENTER);
             mSlot.setEms(mSlotLength);
             mSlot.setTypeface(Typeface.MONOSPACE);
             mSlot.setSelectAllOnFocus(true);
-            mSlot.setBackgroundTintList(getResources().getColorStateList(mUnderlineColor));
+            ViewCompat.setBackgroundTintList(mSlot, getResources().getColorStateList(mUnderlineColor));
             mSlot.setHintTextColor(getResources().getColorStateList(mHintColor));
             if(mHint.length() > mSlotIndex)
                 mSlot.setHint(String.valueOf(mHint.charAt(mSlotIndex)));
