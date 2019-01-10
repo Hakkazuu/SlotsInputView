@@ -5,16 +5,17 @@
 ![](https://imgur.com/N08gwIl.gif)
 
 ## **Integration**
-Keep in mind that `SlotsInputView` has min API level 14 and these dependencies::
+
+Keep in mind that `SlotsInputView` has min API level 14 and these dependencies:
 ```groovy
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+implementation 'androidx.appcompat:appcompat:1.0.2'
 ```
 
 In Project `build.gradle`:
 ```groovy
-    repositories {
-        jcenter()
-    }
+repositories {
+    jcenter()
+}
 ```
 
 In module `build.gradle`:
