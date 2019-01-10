@@ -6,7 +6,7 @@
 
 ## **Integration**
 
-Keep in mind that `SlotsInputView` has min API level 14 and these dependencies:
+Keep in mind that `SlotsInputView` has min API level 14 and this dependency:
 ```groovy
 implementation 'androidx.appcompat:appcompat:1.0.2'
 ```
