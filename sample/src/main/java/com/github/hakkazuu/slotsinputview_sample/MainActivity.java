@@ -26,9 +26,9 @@ public class MainActivity extends Activity {
         // Created programmatically
         mInfoTextView = findViewById(R.id.info_text_view);
         mSlotsInputView1 = findViewById(R.id.view_slots_input1);
-        mSlotsInputView1.setLength(5);
-        mSlotsInputView1.setHint("*****");
-        mSlotsInputView1.setSlotTextSize(30);
+        mSlotsInputView1.setLength(4);
+        mSlotsInputView1.setHint("****");
+        mSlotsInputView1.setSlotTextSize(40);
         mSlotsInputView1.setSlotTextColor(R.color.text_color_states);
         mSlotsInputView1.setHintTextColor(R.color.hint_color_states);
         mSlotsInputView1.setUnderlineColor(R.color.underline_color_states);
@@ -38,13 +38,6 @@ public class MainActivity extends Activity {
                 "\ntext: " + text +
                 "\ntextArrayList: " + textArrayList.toString() +
                 "\nisFilled: " + isFilled));
-
-        // Created with XML attrs
-        mGoButton = findViewById(R.id.go_button);
-        mSlotsInputView2 = findViewById(R.id.view_slots_input2);
-        mSlotsInputView2.setOnSlotsTextChangedListener((text, textArrayList, isFilled) -> mGoButton.setEnabled(isFilled));
-
-        mGoButton.setOnClickListener(v -> Toast.makeText(MainActivity.this, mSlotsInputView2.getText(), Toast.LENGTH_LONG).show());
 
     }
 

@@ -269,7 +269,7 @@ public class SlotsInputView extends LinearLayout {
 
     private void requestFocusOnNextSlot(Slot currentSlot) {
         if(mSlotList.indexOf(currentSlot) != mLength - 1)
-            mSlotList.get(mSlotList.indexOf(currentSlot) + 1).mSlot.requestFocus();
+            mSlotList.get(mSlotList.indexOf(currentSlot) + 1).mSlot.requestFocusFromTouch();
         else {
             try {
                 InputMethodManager imm = (InputMethodManager) mRoot.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -284,7 +284,7 @@ public class SlotsInputView extends LinearLayout {
 
     private void requestFocusOnPrevSlot(Slot currentSlot) {
         if(mSlotList.indexOf(currentSlot) != 0)
-            mSlotList.get(mSlotList.indexOf(currentSlot) - 1).mSlot.requestFocus();
+            mSlotList.get(mSlotList.indexOf(currentSlot) - 1).mSlot.requestFocusFromTouch();
         else {
             try {
                 InputMethodManager imm = (InputMethodManager) mRoot.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);

@@ -7,85 +7,35 @@
     android:layout_height="match_parent"
     tools:context="com.github.hakkazuu.slotsinputview_sample.MainActivity">
 
-    <TextView
-        android:id="@+id/view_slots_input_programmatically_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/view_slots_input_programmatically_title"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.github.hakkazuu.slotsinputview.SlotsInputView
         android:id="@+id/view_slots_input1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/view_slots_input_programmatically_title"
-        app:layout_constraintStart_toStartOf="@+id/view_slots_input_programmatically_title"
-        app:layout_constraintTop_toBottomOf="@+id/view_slots_input_programmatically_title" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/info_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_slots_input1" />
-
-    <TextView
-        android:id="@+id/view_slots_input_xml_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/view_slots_input_xml_title"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/view_slots_input2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.github.hakkazuu.slotsinputview.SlotsInputView
-        android:id="@+id/view_slots_input2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/go_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:siv_hint="*****"
-        app:siv_hint_color="@color/hint_color_states"
-        app:siv_input_type="number"
-        app:siv_length="5"
-        app:siv_text_color="@color/text_color_states"
-        app:siv_text_size="30sp"
-        app:siv_underline_color="@color/underline_color_states" />
-
-    <Button
-        android:id="@+id/go_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:enabled="false"
-        android:text="@string/go_button_label"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+ />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
