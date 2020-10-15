@@ -8,7 +8,7 @@
 
 Keep in mind that `SlotsInputView` has min API level 14 and this dependency:
 ```groovy
-implementation 'androidx.appcompat:appcompat:1.0.2'
+implementation 'androidx.appcompat:appcompat:1.2.0'
 ```
 
 In Project `build.gradle`:
@@ -20,7 +20,7 @@ repositories {
 
 In module `build.gradle`:
 ```groovy
-compile 'com.github.hakkazuu:slotsinputview:0.0.6'
+compile 'com.github.hakkazuu:slotsinputview:0.0.7'
 ```
 
 ## **Sample**
@@ -40,8 +40,8 @@ Then you can configure view programmatically:
         // Number of slots (default - 4)
         slotsInputView.setLength(5);
         
-        // Hint text (default - "****")
-        slotsInputView.setHint("*****");
+        // Hint text (default - '*')
+        slotsInputView.setHint('*');
         
         // Text size in SP (default - 20)
         slotsInputView.setSlotTextSize(30);
@@ -61,7 +61,7 @@ Or you can do the same with XML attributes:
 ```xml
     <com.github.hakkazuu.slotsinputview.SlotsInputView
         app:siv_length="5"
-        app:siv_hint="*****"
+        app:siv_hint="*"
         app:siv_text_size="30sp"
         app:siv_text_color="@color/text_color_states"
         app:siv_hint_color="@color/hint_color_states"
@@ -81,9 +81,13 @@ Finally, handle SlotInputView's text and status of filling slots in your code as
     });
 ```
 
+## **What's new**
+* **0.0.7**
+    * Now hint value is a `char` (`String` in older)
+
 ## **License**
 
-    Copyright 2018 Anton Shakhov
+    Copyright 2020 Anton Shakhov
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

@@ -1,14 +1,15 @@
-apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 30
+        versionCode 7
+        versionName "0.0.7"
     }
 
     buildTypes {
@@ -24,18 +25,104 @@ android {
     }
 }
 
-publish {
-    userOrg = 'hakkazuu'
-    groupId = 'com.github.hakkazuu'
-    artifactId = 'slotsinputview'
-    publishVersion = '0.0.6'
-    desc = 'Simple view for input activation codes, PIN-codes etc.'
-    licences = ['Apache-2.0']
-    uploadName='SlotsInputView'
-    website = 'https://github.com/Hakkazuu/SlotsInputView'
-}
-
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+}
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'SlotsInputView'
+    publishedGroupId = 'com.github.hakkazuu'
+    libraryName = 'SlotsInputView'
+    artifact = 'slotsinputview'
+    libraryDescription = 'Simple view for input activation codes, PIN-codes etc.'
+    libraryVersion = '0.0.7'
+
+    siteUrl = 'https://github.com/Hakkazuu/SlotsInputView'
+    gitUrl = 'https://github.com/Hakkazuu/SlotsInputView.git'
+    githubRepository= 'Hakkazuu/SlotsInputView'
+
+    developerId = 'Hakkazuu'
+    developerName = 'Anton Shakhov'
+    developerEmail = 'hakkazuu@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+group = publishedGroupId
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+
+                groupId publishedGroupId
+                artifactId = artifact
+                name libraryName
+                description = libraryDescription
+                url siteUrl
+
+                licenses {
+                    license {
+                        name licenseName
+                        url licenseUrl
+                    }
+                }
+                developers {
+                    developer {
+                        id developerId
+                        name developerName
+                        email developerEmail
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+tasks.withType(Javadoc) {
+    enabled = false
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+bintray {
+    user = System.getenv("bintrayUser")
+    key = System.getenv("bintrayApiKey")
+
+    configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = allLicenses
+        publish = true
+    }
 }

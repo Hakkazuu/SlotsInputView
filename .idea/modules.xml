@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SlotsInputView.iml" filepath="$PROJECT_DIR$/SlotsInputView.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
-      <module fileurl="file://$PROJECT_DIR$/slotsinputview/slotsinputview.iml" filepath="$PROJECT_DIR$/slotsinputview/slotsinputview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SlotsInputView.iml" filepath="$PROJECT_DIR$/.idea/modules/SlotsInputView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample/SlotsInputView.sample.iml" filepath="$PROJECT_DIR$/.idea/modules/sample/SlotsInputView.sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/slotsinputview/SlotsInputView.slotsinputview.iml" filepath="$PROJECT_DIR$/.idea/modules/slotsinputview/SlotsInputView.slotsinputview.iml" />
     </modules>
   </component>
 </project>

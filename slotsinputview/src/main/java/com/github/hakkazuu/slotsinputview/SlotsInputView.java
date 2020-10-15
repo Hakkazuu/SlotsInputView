@@ -1,5 +1,7 @@
 package com.github.hakkazuu.slotsinputview;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -8,11 +10,14 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.KeyListener;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -42,7 +47,7 @@ public class SlotsInputView extends LinearLayout {
     @ColorRes private int mHintColor;
     @ColorRes private int mUnderlineColor;
     private boolean mIsEnabled;
-    private String mHint;
+    private char mHint;
     private ArrayList<Slot> mSlotList = new ArrayList<>();
     private OnSlotsTextChangedListener mOnSlotsTextChangedListener = null;
 
@@ -54,7 +59,7 @@ public class SlotsInputView extends LinearLayout {
     @ColorRes private static final int DEFAULT_HINT_COLOR = android.R.color.darker_gray;
     @ColorRes private static final int DEFAULT_UNDERLINE_COLOR = android.R.color.black;
     private static final boolean DEFAULT_ENABLED = true;
-    private static final String DEFAULT_HINT = "****";
+    private static final char DEFAULT_HINT = '*';
 
     public SlotsInputView(Context context) {
         super(context);
@@ -150,14 +155,12 @@ public class SlotsInputView extends LinearLayout {
 
     /**
      * Sets hint text
-     * @param hint - string
+     * @param hint - char
      */
-    public void setHint(String hint) {
+    public void setHint(char hint) {
         mHint = hint;
         for(Slot slot : mSlotList) {
-            if(mHint.length() > slot.mSlotIndex)
-                slot.mSlot.setHint(String.valueOf(mHint.charAt(slot.mSlotIndex)));
-            else slot.mSlot.setHint(null);
+            slot.mSlot.setHint(String.valueOf(mHint));
         }
     }
 
@@ -184,14 +187,6 @@ public class SlotsInputView extends LinearLayout {
             slot.mSlot.setEnabled(mIsEnabled);
             slot.mSlot.setTextColor(getResources().getColorStateList(mIsEnabled ? mTextColor : mHintColor));
         }
-    }
-
-    /**
-     * Recreates slots
-     */
-    public void clear() {
-        createSlots();
-        checkSlots();
     }
 
     /**
@@ -232,21 +227,66 @@ public class SlotsInputView extends LinearLayout {
         mTextSize = typedArray.getDimension(R.styleable.SlotsInputView_siv_text_size, DEFAULT_TEXT_SIZE);
         mTextColor = typedArray.getResourceId(R.styleable.SlotsInputView_siv_text_color, DEFAULT_TEXT_COLOR);
 
-        String hintAttr = typedArray.getString(R.styleable.SlotsInputView_siv_hint);
-        mHint = hintAttr == null ? DEFAULT_HINT : hintAttr;
+        mHint = DEFAULT_HINT;
+        if(typedArray.getString(R.styleable.SlotsInputView_siv_hint) != null
+                && !typedArray.getString(R.styleable.SlotsInputView_siv_hint).isEmpty()) {
+            mHint = typedArray.getString(R.styleable.SlotsInputView_siv_hint).charAt(0);
+        }
+
         mHintColor = typedArray.getResourceId(R.styleable.SlotsInputView_siv_hint_color, DEFAULT_HINT_COLOR);
 
         mUnderlineColor = typedArray.getResourceId(R.styleable.SlotsInputView_siv_underline_color, DEFAULT_UNDERLINE_COLOR);
     }
 
     private void createSlots() {
-        mLayout.removeAllViews();
-        mSlotList.clear();
+        if(mSlotList.isEmpty()) {
+            mLayout.removeAllViews();
+            mSlotList.clear();
 
-        for (int i = 0; i < mLength; i++) {
-            Slot slot = new Slot(new EditText(mRoot.getContext()), i);
-            mLayout.addView(slot.mSlot);
-            mSlotList.add(slot);
+            for (int i = 0; i < mLength; i++) {
+                Slot slot = new Slot(new EditText(mRoot.getContext()), i);
+                mLayout.addView(slot.mSlot);
+                mSlotList.add(slot);
+            }
+        } else {
+            int animationDuration = getResources().getInteger(android.R.integer.config_mediumAnimTime);
+
+            if(mLength > mSlotList.size()) {
+                for (int i = mSlotList.size(); i < mLength; i++) {
+                    Slot slot = new Slot(new EditText(mRoot.getContext()), i);
+                    slot.mSlot.setAlpha(0.0f);
+
+                    mLayout.addView(slot.mSlot);
+                    mSlotList.add(slot);
+
+                    slot.mSlot.animate()
+                            .alpha(1.0f)
+                            .setDuration(animationDuration)
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    checkSlots();
+                                }
+                            });
+                }
+            } else if(mLength < mSlotList.size()) {
+                for (int i = mSlotList.size() - 1; i >= mLength; i--) {
+                    Slot currentSlot = mSlotList.get(i);
+
+                    currentSlot.mSlot.animate()
+                            .alpha(0.0f)
+                            .setDuration(animationDuration)
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    mLayout.removeView(currentSlot.mSlot);
+                                    mSlotList.remove(currentSlot);
+
+                                    checkSlots();
+                                }
+                            });
+                }
+            }
         }
     }
 
@@ -310,15 +350,14 @@ public class SlotsInputView extends LinearLayout {
             mSlotIndex = slotIndex;
             mSlot.setEnabled(mIsEnabled);
             mSlot.setTextColor(getResources().getColorStateList(mIsEnabled ? mTextColor : mHintColor));
-            mSlot.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
+            mSlot.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSize);
             mSlot.setGravity(Gravity.CENTER);
             mSlot.setEms(mSlotLength);
             mSlot.setTypeface(Typeface.MONOSPACE);
             mSlot.setSelectAllOnFocus(true);
             ViewCompat.setBackgroundTintList(mSlot, getResources().getColorStateList(mUnderlineColor));
             mSlot.setHintTextColor(getResources().getColorStateList(mHintColor));
-            if(mHint.length() > mSlotIndex)
-                mSlot.setHint(String.valueOf(mHint.charAt(mSlotIndex)));
+            mSlot.setHint(String.valueOf(mHint));
             mSlot.setMaxLines(1);
             mSlot.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSlotLength)});
             mSlot.setInputType(mInputType);
@@ -330,7 +369,7 @@ public class SlotsInputView extends LinearLayout {
                 }
             });
             mSlot.setOnKeyListener((view, keyCode, event) -> {
-                if(keyCode == KeyEvent.KEYCODE_DEL) {
+                if(keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
                     requestFocusOnPrevSlot(Slot.this);
                     checkSlots();
                 }
