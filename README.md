@@ -20,7 +20,7 @@ repositories {
 
 In module `build.gradle`:
 ```groovy
-compile 'com.github.hakkazuu:slotsinputview:0.0.7'
+compile 'com.github.hakkazuu:slotsinputview:0.0.8'
 ```
 
 ## **Sample**

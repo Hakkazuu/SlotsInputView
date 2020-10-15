@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 30
-        versionCode 7
-        versionName "0.0.7"
+        versionCode 8
+        versionName "0.0.8"
     }
 
     buildTypes {
@@ -37,7 +37,7 @@ ext {
     libraryName = 'SlotsInputView'
     artifact = 'slotsinputview'
     libraryDescription = 'Simple view for input activation codes, PIN-codes etc.'
-    libraryVersion = '0.0.7'
+    libraryVersion = '0.0.8'
 
     siteUrl = 'https://github.com/Hakkazuu/SlotsInputView'
     gitUrl = 'https://github.com/Hakkazuu/SlotsInputView.git'
@@ -53,6 +53,7 @@ ext {
 }
 
 group = publishedGroupId
+version = libraryVersion
 
 install {
     repositories.mavenInstaller {
