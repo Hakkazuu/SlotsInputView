@@ -1,4 +1,5 @@
 # **SlotsInputView**
+[ ![Download](https://api.bintray.com/packages/hakkazuu/maven/SlotsInputView/images/download.svg) ](https://bintray.com/hakkazuu/maven/SlotsInputView/_latestVersion)
 
 `SlotsInputView` is a simple view for input activation codes, PIN-codes etc.
 
